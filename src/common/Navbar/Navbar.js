@@ -3,164 +3,133 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 
-// logo
 import AppLogo from "../../assets/images/brand-logo.svg";
 
-// menu
-const navItems = [
-	{ id: "01", name: "Home" },
-	{ id: "02", name: "Pages" },
-	{ id: "03", name: "Shops" },
-	{ id: "03", name: "Blogs" },
-];
+const pages = ["Home", "Pages", "Shops", "Blog"];
 
-export default function Navbar() {
-	const [anchorEl, setAnchorEl] = useState(null);
-	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+function Navbar() {
+	const [anchorElNav, setAnchorElNav] = useState(null);
 
-	const isMenuOpen = Boolean(anchorEl);
-	const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-	const handleMobileMenuClose = () => {
-		setMobileMoreAnchorEl(null);
+	const handleOpenNavMenu = (event) => {
+		setAnchorElNav(event.currentTarget);
 	};
 
-	const handleMenuClose = () => {
-		setAnchorEl(null);
-		handleMobileMenuClose();
+	const handleCloseNavMenu = () => {
+		setAnchorElNav(null);
 	};
-
-	const handleMobileMenuOpen = (event) => {
-		setMobileMoreAnchorEl(event.currentTarget);
-	};
-
-	const menuId = "primary-search-account-menu";
-	const renderMenu = (
-		<Menu
-			anchorEl={anchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={menuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMenuOpen}
-			onClose={handleMenuClose}
-		>
-			<MenuItem onClick={handleMenuClose}>My account</MenuItem>
-		</Menu>
-	);
-
-	// for small device
-	const mobileMenuId = "primary-search-account-menu-mobile";
-	const renderMobileMenu = (
-		<Menu
-			anchorEl={mobileMoreAnchorEl}
-			anchorOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			id={mobileMenuId}
-			keepMounted
-			transformOrigin={{
-				vertical: "top",
-				horizontal: "right",
-			}}
-			open={isMobileMenuOpen}
-			onClose={handleMobileMenuClose}
-		>
-			<MenuItem>
-				<IconButton
-					size="large"
-					aria-label="show 4 new mails"
-					color="secondary"
-				>
-					<Badge badgeContent={4} color="error">
-						<MailIcon />
-					</Badge>
-				</IconButton>
-				<p>Messages</p>
-			</MenuItem>
-			<MenuItem>
-				<IconButton
-					size="large"
-					aria-label="show 17 new notifications"
-					color="secondary"
-				>
-					<Badge badgeContent={3} color="secondary">
-						<NotificationsIcon />
-					</Badge>
-				</IconButton>
-				<p>Notifications</p>
-			</MenuItem>
-		</Menu>
-	);
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
-			<AppBar position="static" sx={{ backgroundColor: "#fff" }}>
-				<Toolbar>
-					<img src={AppLogo} alt="logo" />
-					<Box>
-						<List sx={{ display: "flex" }}>
-							{navItems.map((item) => (
-								<ListItem key={item.id} disablePadding>
-									<ListItemButton sx={{ textAlign: "center" }}>
-										<ListItemText secondary={item.name} />
-									</ListItemButton>
-								</ListItem>
-							))}
-						</List>
+		<AppBar
+			position="static"
+			sx={{ bgcolor: (theme) => theme.palette.common.white }}
+		>
+			<Container maxWidth="xl">
+				<Toolbar disableGutters>
+					{/* Logo for large screen */}
+					<Box
+						variant="h6"
+						noWrap
+						sx={{
+							mr: 2,
+							display: { xs: "none", md: "flex" },
+							fontFamily: "monospace",
+							fontWeight: 700,
+							letterSpacing: ".3rem",
+							color: "inherit",
+							textDecoration: "none",
+						}}
+					>
+						<img src={AppLogo} alt="logo" />
 					</Box>
-					<Box sx={{ flexGrow: 1 }} />
-					<Box sx={{ display: { xs: "none", md: "flex" } }}>
+
+					{/* menu for small screen */}
+					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
 						<IconButton
 							size="large"
-							aria-label="show 4 new mails"
-							color="secondary"
-						>
-							<Badge badgeContent={4} color="error">
-								<MailIcon />
-							</Badge>
-						</IconButton>
-						<IconButton
-							size="large"
-							aria-label="show 17 new notifications"
-							color="secondary"
-						>
-							<Badge badgeContent={17} color="error">
-								<NotificationsIcon />
-							</Badge>
-						</IconButton>
-					</Box>
-					<Box sx={{ display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="show more"
-							aria-controls={mobileMenuId}
+							aria-label="account of current user"
+							aria-controls="menu-appbar"
 							aria-haspopup="true"
-							onClick={handleMobileMenuOpen}
-							color="secondary"
+							onClick={handleOpenNavMenu}
+							color="inherit"
 						>
-							<MoreIcon />
+							<MenuIcon />
 						</IconButton>
+						<Menu
+							id="menu-appbar"
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: "bottom",
+								horizontal: "left",
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: "top",
+								horizontal: "left",
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{
+								display: { xs: "block", md: "none" },
+							}}
+						>
+							{pages.map((page) => (
+								<MenuItem key={page} onClick={handleCloseNavMenu}>
+									<Typography textAlign="center">{page}</Typography>
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
+
+					{/* logo for small screen */}
+					<Box
+						noWrap
+						sx={{
+							mr: 2,
+							display: { xs: "flex", md: "none" },
+							flexGrow: 1,
+							fontFamily: "monospace",
+							fontWeight: 700,
+							letterSpacing: ".3rem",
+							color: "inherit",
+							textDecoration: "none",
+						}}
+					>
+						<img src={AppLogo} alt="logo" />
+					</Box>
+
+					{/* menu for large screen */}
+					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+						{pages.map((page) => (
+							<Button
+								key={page}
+								onClick={handleCloseNavMenu}
+								sx={{ my: 2, color: "text.primary", display: "block" }}
+							>
+								{page}
+							</Button>
+						))}
+					</Box>
+
+					{/* cart */}
+					<Box sx={{ flexGrow: 0 }}>
+						<Tooltip title="Open cart">
+							<IconButton sx={{ p: 0 }}>
+								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+							</IconButton>
+						</Tooltip>
 					</Box>
 				</Toolbar>
-			</AppBar>
-			{renderMobileMenu}
-			{renderMenu}
-		</Box>
+			</Container>
+		</AppBar>
 	);
 }
+export default Navbar;
