@@ -1,10 +1,13 @@
 import { Box, Container, Typography } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+// import { useStyles } from "./styled";
 
 // apply js style from material ui
 const Hero = () => {
+	// const classes = useStyles();
+
 	return (
-		<Box sx={{ backgroundColor: "#ddd", height: "100vh", py: 5 }}>
+		<Box sx={{ backgroundColor: "#fbf6ef", height: "100vh", py: 5 }}>
 			<Container maxWidth="lg">
 				<Box
 					sx={{
@@ -15,17 +18,20 @@ const Hero = () => {
 				>
 					<Box
 						sx={{
-							backgroundColor: "orange",
+							backgroundColor: "#fcdda3",
 							display: "flex",
+							alignItems: "center",
 							gap: 1.5,
 							p: 1,
 							maxWidth: "280px",
 						}}
 					>
 						{/* icon */}
-						<DirectionsCarIcon />
+						<DirectionsCarIcon color="primary" />
 						{/* content */}
-						<Typography>Fastest Delivery Guaranteed</Typography>
+						<Typography variant="h6" color="text.secondary" fontWeight="bold">
+							Fastest Delivery Guaranteed
+						</Typography>
 					</Box>
 				</Box>
 			</Container>
