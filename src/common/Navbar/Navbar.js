@@ -109,6 +109,7 @@ function Navbar() {
 					{/* menu for large screen */}
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages.map((page) => (
+							// <Link to={}>
 							<Button
 								key={page}
 								onClick={handleCloseNavMenu}
@@ -116,6 +117,7 @@ function Navbar() {
 							>
 								{page}
 							</Button>
+							// </Link>
 						))}
 					</Box>
 
