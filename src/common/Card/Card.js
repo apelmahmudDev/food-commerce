@@ -44,5 +44,4 @@ const Card = ({ pizza }) => {
 		</MuiCard>
 	);
 };
-
 export default Card;

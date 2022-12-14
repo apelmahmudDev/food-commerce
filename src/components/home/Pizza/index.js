@@ -1,7 +1,11 @@
-import { Container, Typography, Box, Grid } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import { Card } from "../../../common";
 
-/* home task import */
-import Card from "../../../common/Card/Card";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
 
 import { pizzaData } from "./data";
 
@@ -20,13 +24,13 @@ const Pizza = () => {
 
 				{/* food - card */}
 				<Box my={5}>
-					<Grid container spacing={5}>
+					<Swiper spaceBetween={50} slidesPerView={4}>
 						{pizzaData.map((pizza) => (
-							<Grid key={pizza.id} item xs={12} md={3}>
+							<SwiperSlide key={pizza.id}>
 								<Card pizza={pizza} />
-							</Grid>
+							</SwiperSlide>
 						))}
-					</Grid>
+					</Swiper>
 				</Box>
 			</Container>
 		</>

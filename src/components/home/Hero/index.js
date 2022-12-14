@@ -19,7 +19,7 @@ const Hero = () => {
 	const classes = useStyles();
 
 	return (
-		<Box sx={{ backgroundColor: "#fbf6ef", height: "100vh", py: 5 }}>
+		<Box sx={{ backgroundColor: "#fbf6ef", py: 5 }}>
 			<Container maxWidth="lg">
 				<Grid container spacing={5}>
 					<Grid item xs={12} md={6}>
