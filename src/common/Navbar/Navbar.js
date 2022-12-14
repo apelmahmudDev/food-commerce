@@ -7,14 +7,20 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 import AppLogo from "../../assets/images/brand-logo.svg";
+import { Badge } from "@mui/material";
 
-const pages = ["Home", "Pages", "Shops", "Blog"];
+const pages = [
+	{ page: "Home", link: "/home" },
+	{ page: "Pages", link: "/pages" },
+	{ page: "Shops", link: "/shops" },
+	{ page: "Blog", link: "/blog" },
+];
 
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = useState(null);
@@ -82,8 +88,8 @@ function Navbar() {
 							}}
 						>
 							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
+								<MenuItem key={page.page} onClick={handleCloseNavMenu}>
+									<Typography textAlign="center">{page.page}</Typography>
 								</MenuItem>
 							))}
 						</Menu>
@@ -111,12 +117,13 @@ function Navbar() {
 						{pages.map((page) => (
 							// <Link to={}>
 							<Button
-								key={page}
+								key={page.page}
 								onClick={handleCloseNavMenu}
 								sx={{ my: 2, color: "text.primary", display: "block" }}
 							>
-								{page}
+								{page.page}
 							</Button>
+
 							// </Link>
 						))}
 					</Box>
@@ -124,9 +131,9 @@ function Navbar() {
 					{/* cart */}
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open cart">
-							<IconButton sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-							</IconButton>
+							<Badge badgeContent={0} color="primary">
+								<ShoppingCartIcon color="action" />
+							</Badge>
 						</Tooltip>
 					</Box>
 				</Toolbar>
