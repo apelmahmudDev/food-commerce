@@ -1,9 +1,13 @@
 import { Box, Container, Grid } from "@mui/material";
+import { useContext } from "react";
+import { CartContext } from "../../../App";
 import CartTable from "../CartTable";
 import CartTitle from "../CartTitle";
 import CartTotal from "../CartTotal";
 
 const CartContainer = () => {
+	const { cart } = useContext(CartContext);
+
 	return (
 		<Box my={5}>
 			<Container maxWidth="lg">

@@ -17,7 +17,7 @@ import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const pages = [
-	{ page: "Home", link: "/home" },
+	{ page: "Home", link: "/" },
 	{ page: "Pages", link: "/pages" },
 	{ page: "Shops", link: "/shops" },
 	{ page: "Blog", link: "/blog" },
