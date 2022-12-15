@@ -6,14 +6,16 @@ import "@fontsource/roboto/700.css";
 
 import { ThemeProvider } from "@mui/material/styles";
 
-// pages
-import Home from "./pages/home";
+// react router dom
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
+
 import { theme } from "./theme";
 
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Home />
+			<RouterProvider router={router} />
 		</ThemeProvider>
 	);
 }

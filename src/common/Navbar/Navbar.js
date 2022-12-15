@@ -14,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import AppLogo from "../../assets/images/brand-logo.svg";
 import { Badge } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const pages = [
 	{ page: "Home", link: "/home" },
@@ -115,25 +116,26 @@ function Navbar() {
 					{/* menu for large screen */}
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages.map((page) => (
-							// <Link to={}>
-							<Button
-								key={page.page}
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "text.primary", display: "block" }}
-							>
-								{page.page}
-							</Button>
-
-							// </Link>
+							<Link to={page.link}>
+								<Button
+									key={page.page}
+									onClick={handleCloseNavMenu}
+									sx={{ my: 2, color: "text.primary", display: "block" }}
+								>
+									{page.page}
+								</Button>
+							</Link>
 						))}
 					</Box>
 
 					{/* cart */}
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open cart">
-							<Badge badgeContent={0} color="primary">
-								<ShoppingCartIcon color="action" />
-							</Badge>
+							<Link to="/cart">
+								<Badge badgeContent={0} color="primary">
+									<ShoppingCartIcon color="action" />
+								</Badge>
+							</Link>
 						</Tooltip>
 					</Box>
 				</Toolbar>
