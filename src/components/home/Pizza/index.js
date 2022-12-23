@@ -17,7 +17,6 @@ const Pizza = () => {
 					variant="h3"
 					fontWeight="bold"
 					sx={{ my: 5, textAlign: "center" }}
-					gutterbottom
 				>
 					Weekly Pizza Offer
 				</Typography>

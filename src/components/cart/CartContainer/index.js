@@ -6,7 +6,7 @@ import CartTitle from "../CartTitle";
 import CartTotal from "../CartTotal";
 
 const CartContainer = () => {
-	const { cart } = useContext(CartContext);
+	const { cart, dispatch } = useContext(CartContext);
 
 	return (
 		<Box my={5}>
@@ -15,7 +15,7 @@ const CartContainer = () => {
 
 				<Grid container spacing={5}>
 					<Grid item xs={12} md={8}>
-						<CartTable />
+						<CartTable cart={cart} dispatch={dispatch} />
 					</Grid>
 					<Grid item xs={12} md={4}>
 						<CartTotal />

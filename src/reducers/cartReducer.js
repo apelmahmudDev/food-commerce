@@ -1,7 +1,7 @@
 // initial state
 
 export const initialState = {
-	items: [],
+	items: [], // foods
 	total: 0,
 };
 
@@ -12,11 +12,23 @@ const cartReducer = (state, action) => {
 		case "ADD_TO_CART":
 			return {
 				...state,
-				items: [...state.items, action.payload],
+				items: [...state.items, { ...action.payload, quantity: 1 }],
 			};
 
 		case "REMOVE_FROM_CART":
-			return state.items.filter((item) => item.id !== action.payload.id);
+			return {
+				...state,
+				items: state.items.filter((item) => item.id !== action.payload),
+			};
+
+		// case 'INCREASE_QUANTITY':
+		// return{
+		// 	...state,
+		// 	items: state.map((item) => item.id === action.payload ?
+		// 	[...state.items, quantity: item.quantity + 1]:
+		// 	item
+		// 	)
+		// }
 
 		default:
 			return state;

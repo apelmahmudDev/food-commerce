@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AppLogo from "../../assets/images/brand-logo.svg";
 import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../App";
 
 const pages = [
 	{ page: "Home", link: "/" },
@@ -24,6 +25,8 @@ const pages = [
 ];
 
 function Navbar() {
+	const { cart } = useContext(CartContext);
+
 	const [anchorElNav, setAnchorElNav] = useState(null);
 
 	const handleOpenNavMenu = (event) => {
@@ -44,7 +47,6 @@ function Navbar() {
 					{/* Logo for large screen */}
 					<Box
 						variant="h6"
-						noWrap
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
@@ -98,7 +100,6 @@ function Navbar() {
 
 					{/* logo for small screen */}
 					<Box
-						noWrap
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
@@ -116,7 +117,7 @@ function Navbar() {
 					{/* menu for large screen */}
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 						{pages.map((page) => (
-							<Link to={page.link}>
+							<Link key={page.page} to={page.link}>
 								<Button
 									key={page.page}
 									onClick={handleCloseNavMenu}
@@ -132,7 +133,7 @@ function Navbar() {
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open cart">
 							<Link to="/cart">
-								<Badge badgeContent={0} color="primary">
+								<Badge badgeContent={cart?.items?.length} color="primary">
 									<ShoppingCartIcon color="action" />
 								</Badge>
 							</Link>

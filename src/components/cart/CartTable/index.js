@@ -13,7 +13,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
 
-const CartTable = () => {
+const CartTable = ({ cart, dispatch }) => {
 	return (
 		<TableContainer component={Paper} elevation={4}>
 			<Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -27,35 +27,59 @@ const CartTable = () => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					<TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-						<TableCell
-							component="th"
-							scope="row"
-							sx={{ display: "flex", gap: 2, alignItems: "center" }}
+					{/* message */}
+					{cart?.items?.length === 0 && (
+						<TableRow>
+							<TableCell
+								component="th"
+								scope="row"
+								sx={{ display: "flex", gap: 2, alignItems: "center" }}
+							>
+								<Typography>You have no food in the cart!</Typography>
+							</TableCell>
+						</TableRow>
+					)}
+
+					{cart?.items?.map((food) => (
+						<TableRow
+							key={food.id}
+							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
 						>
-							<Avatar />
-							<Typography>Margherita Pizza</Typography>
-						</TableCell>
-						<TableCell align="right">$234</TableCell>
-						<TableCell
-							align="right"
-							sx={{ display: "flex", gap: 2, alignItems: "center" }}
-						>
-							<IconButton color="primary">
-								<RemoveIcon />
-							</IconButton>
-							<Typography>1</Typography>
-							<IconButton color="primary">
-								<AddIcon />
-							</IconButton>
-						</TableCell>
-						<TableCell align="right">3948</TableCell>
-						<TableCell align="right">
-							<IconButton variant="contained" color="primary">
-								<CloseIcon />
-							</IconButton>
-						</TableCell>
-					</TableRow>
+							<TableCell
+								component="th"
+								scope="row"
+								sx={{ display: "flex", gap: 2, alignItems: "center" }}
+							>
+								<Avatar />
+								<Typography>{food.name}</Typography>
+							</TableCell>
+							<TableCell align="right">${food.price}</TableCell>
+							<TableCell
+								align="right"
+								sx={{ display: "flex", gap: 2, alignItems: "center" }}
+							>
+								<IconButton color="primary">
+									<RemoveIcon />
+								</IconButton>
+								<Typography>{food.quantity}</Typography>
+								<IconButton color="primary">
+									<AddIcon />
+								</IconButton>
+							</TableCell>
+							<TableCell align="right">{food.price * food.quantity}</TableCell>
+							<TableCell align="right">
+								<IconButton
+									onClick={() =>
+										dispatch({ type: "REMOVE_FROM_CART", payload: food.id })
+									}
+									variant="contained"
+									color="primary"
+								>
+									<CloseIcon />
+								</IconButton>
+							</TableCell>
+						</TableRow>
+					))}
 				</TableBody>
 			</Table>
 		</TableContainer>

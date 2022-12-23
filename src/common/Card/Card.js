@@ -8,23 +8,29 @@ import {
 
 // icons
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useContext } from "react";
+import { CartContext } from "../../App";
+import { Link } from "react-router-dom";
 
 const Card = ({ pizza }) => {
+	const { dispatch, cart } = useContext(CartContext);
+
 	return (
 		<MuiCard sx={{ maxWidth: 345 }}>
 			<CardMedia sx={{}} component="img" alt="food" image={pizza.image} />
 			<CardContent>
+				<Link to={`/food/${pizza.id}`}>
+					<Typography
+						variant="h5"
+						component="div"
+						fontWeight="bold"
+						textAlign="center"
+					>
+						{pizza.name}
+					</Typography>
+				</Link>
+
 				<Typography
-					gutterBottom
-					variant="h5"
-					component="div"
-					fontWeight="bold"
-					textAlign="center"
-				>
-					{pizza.name}
-				</Typography>
-				<Typography
-					gutterBottom
 					variant="h6"
 					fontWeight="bold"
 					textAlign="center"
@@ -34,6 +40,7 @@ const Card = ({ pizza }) => {
 				</Typography>
 
 				<Button
+					onClick={() => dispatch({ type: "ADD_TO_CART", payload: pizza })}
 					variant="contained"
 					fullWidth
 					startIcon={<AddShoppingCartIcon />}
