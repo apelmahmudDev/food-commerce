@@ -58,11 +58,21 @@ const CartTable = ({ cart, dispatch }) => {
 								align="right"
 								sx={{ display: "flex", gap: 2, alignItems: "center" }}
 							>
-								<IconButton color="primary">
+								<IconButton
+									onClick={() =>
+										dispatch({ type: "DECREASE_QUANTITY", payload: food.id })
+									}
+									color="primary"
+								>
 									<RemoveIcon />
 								</IconButton>
 								<Typography>{food.quantity}</Typography>
-								<IconButton color="primary">
+								<IconButton
+									onClick={() =>
+										dispatch({ type: "INCREASE_QUANTITY", payload: food.id })
+									}
+									color="primary"
+								>
 									<AddIcon />
 								</IconButton>
 							</TableCell>

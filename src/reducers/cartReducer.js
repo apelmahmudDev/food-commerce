@@ -12,7 +12,13 @@ const cartReducer = (state, action) => {
 		case "ADD_TO_CART":
 			return {
 				...state,
-				items: [...state.items, { ...action.payload, quantity: 1 }],
+				items: state.items.find((item) => item.id === action.payload.id)
+					? state.items.map((item) =>
+							item.id === action.payload.id
+								? { ...item, quantity: item.quantity + 1 }
+								: item
+					  )
+					: [...state.items, { ...action.payload, quantity: 1 }],
 			};
 
 		case "REMOVE_FROM_CART":
@@ -21,14 +27,28 @@ const cartReducer = (state, action) => {
 				items: state.items.filter((item) => item.id !== action.payload),
 			};
 
-		// case 'INCREASE_QUANTITY':
-		// return{
-		// 	...state,
-		// 	items: state.map((item) => item.id === action.payload ?
-		// 	[...state.items, quantity: item.quantity + 1]:
-		// 	item
-		// 	)
-		// }
+		case "INCREASE_QUANTITY":
+			return {
+				...state,
+				items: state.items.map((item) =>
+					item.id === action.payload
+						? { ...item, quantity: item.quantity + 1 }
+						: item
+				),
+			};
+
+		case "DECREASE_QUANTITY":
+			return {
+				...state,
+				items:
+					state.items.find((item) => item.id === action.payload).quantity === 1
+						? state.items.filter((item) => item.id !== action.payload)
+						: state.items.map((item) =>
+								item.id === action.payload
+									? { ...item, quantity: item.quantity - 1 }
+									: item
+						  ),
+			};
 
 		default:
 			return state;
